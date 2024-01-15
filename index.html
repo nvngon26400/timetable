@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Table</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        th,
+        td {
+            text-align: center;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        td {
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        td:hover {
+            background-color: #f8d7da;
+        }
+
+        .modal-content {
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 1200px) {
+
+            th,
+            td {
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 992px) {
+
+            th,
+            td {
+                font-size: 0.8em;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            th,
+            td {
+                font-size: 0.7em;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .modal-dialog {
+                max-width: 90%;
+            }
+        }
+
+        @media (max-width: 576px) {
+
+            th,
+            td {
+                font-size: 0.6em;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .modal-dialog {
+                max-width: 90%;
+            }
+
+            table {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2 class="mt-4 mb-4">Lịch Dạy Của Tô 👨‍🏫</h2>
+        <p class="alert alert-warning font-weight-bold" id="current-date-time"></p>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Thời gian</th>
+                    <th scope="col">Thứ Hai</th>
+                    <th scope="col">Thứ Ba</th>
+                    <th scope="col">Thứ Tư</th>
+                    <th scope="col">Thứ Năm</th>
+                    <th scope="col">Thứ Sáu</th>
+                    <th scope="col">Thứ Bảy</th>
+                    <th scope="col">Chủ Nhật</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows for each time slot -->
+                <tr>
+                    <th scope="row">8:00 AM</th>
+                    <td id="monday-8am"></td>
+                    <td id="tuesday-8am"></td>
+                    <td id="wednesday-8am"></td>
+                    <td id="thursday-8am"></td>
+                    <td id="friday-8am"></td>
+                    <td id="saturday-8am"></td>
+                    <td id="sunday-8am"></td>
+                </tr>
+                <tr>
+                    <th scope="row">9:00 AM</th>
+                    <td id="monday-9am"></td>
+                    <td id="tuesday-9am"></td>
+                    <td id="wednesday-9am"></td>
+                    <td id="thursday-9am"></td>
+                    <td id="friday-9am"></td>
+                    <td id="saturday-9am"></td>
+                    <td id="sunday-9am"></td>
+                </tr>
+                <tr>
+                    <th scope="row">10:00 AM</th>
+                    <td id="monday-10am"></td>
+                    <td id="tuesday-10am"></td>
+                    <td id="wednesday-10am"></td>
+                    <td id="thursday-10am"></td>
+                    <td id="friday-10am"></td>
+                    <td id="saturday-10am"></td>
+                    <td id="sunday-10am"></td>
+                </tr>
+                <tr>
+                    <th scope="row">11:00 AM</th>
+                    <td id="monday-11am"></td>
+                    <td id="tuesday-11am"></td>
+                    <td id="wednesday-11am"></td>
+                    <td id="thursday-11am"></td>
+                    <td id="friday-11am"></td>
+                    <td id="saturday-11am"></td>
+                    <td id="sunday-11am"></td>
+                </tr>
+                <tr>
+                    <th scope="row">12:00 PM</th>
+                    <td id="monday-12pm"></td>
+                    <td id="tuesday-12pm"></td>
+                    <td id="wednesday-12pm"></td>
+                    <td id="thursday-12pm"></td>
+                    <td id="friday-12pm"></td>
+                    <td id="saturday-12pm"></td>
+                    <td id="sunday-12pm"></td>
+                </tr>
+                <tr>
+                    <th scope="row">1:00 PM</th>
+                    <td id="monday-1pm"></td>
+                    <td id="tuesday-1pm"></td>
+                    <td id="wednesday-1pm"></td>
+                    <td id="thursday-1pm"></td>
+                    <td id="friday-1pm"></td>
+                    <td id="saturday-1pm"></td>
+                    <td id="sunday-1pm"></td>
+                </tr>
+                <tr>
+                    <th scope="row">2:00 PM</th>
+                    <td id="monday-2pm"></td>
+                    <td id="tuesday-2pm"></td>
+                    <td id="wednesday-2pm"></td>
+                    <td id="thursday-2pm"></td>
+                    <td id="friday-2pm"></td>
+                    <td id="saturday-2pm"></td>
+                    <td id="sunday-2pm"></td>
+                </tr>
+                <tr>
+                    <th scope="row">3:00 PM</th>
+                    <td id="monday-3pm"></td>
+                    <td id="tuesday-3pm"></td>
+                    <td id="wednesday-3pm"></td>
+                    <td id="thursday-3pm"></td>
+                    <td id="friday-3pm"></td>
+                    <td id="saturday-3pm"></td>
+                    <td id="sunday-3pm"></td>
+                </tr>
+                <tr>
+                    <th scope="row">4:00 PM</th>
+                    <td id="monday-4pm"></td>
+                    <td id="tuesday-4pm"></td>
+                    <td id="wednesday-4pm"></td>
+                    <td id="thursday-4pm"></td>
+                    <td id="friday-4pm"></td>
+                    <td id="saturday-4pm"></td>
+                    <td id="sunday-4pm"></td>
+                </tr>
+                <tr>
+                    <th scope="row">5:00 PM</th>
+                    <td id="monday-5pm"></td>
+                    <td id="tuesday-5pm"></td>
+                    <td id="wednesday-5pm"></td>
+                    <td id="thursday-5pm"></td>
+                    <td id="friday-5pm"></td>
+                    <td id="saturday-5pm"></td>
+                    <td id="sunday-5pm"></td>
+                </tr>
+                <tr>
+                    <th scope="row">6:00 PM</th>
+                    <td id="monday-6pm"></td>
+                    <td id="tuesday-6pm"></td>
+                    <td id="wednesday-6pm"></td>
+                    <td id="thursday-6pm"></td>
+                    <td id="friday-6pm"></td>
+                    <td id="saturday-6pm"></td>
+                    <td id="sunday-6pm"></td>
+                </tr>
+                <tr>
+                    <th scope="row">7:00 PM</th>
+                    <td id="monday-7pm"></td>
+                    <td id="tuesday-7pm"></td>
+                    <td id="wednesday-7pm"></td>
+                    <td id="thursday-7pm"></td>
+                    <td id="friday-7pm"></td>
+                    <td id="saturday-7pm"></td>
+                    <td id="sunday-7pm"></td>
+                </tr>
+                <tr>
+                    <th scope="row">8:00 PM</th>
+                    <td id="monday-8pm"></td>
+                    <td id="tuesday-8pm"></td>
+                    <td id="wednesday-8pm"></td>
+                    <td id="thursday-8pm"></td>
+                    <td id="friday-8pm"></td>
+                    <td id="saturday-8pm"></td>
+                    <td id="sunday-8pm"></td>
+                </tr>
+                <tr>
+                    <th scope="row">9:00 PM</th>
+                    <td id="monday-9pm"></td>
+                    <td id="tuesday-9pm"></td>
+                    <td id="wednesday-9pm"></td>
+                    <td id="thursday-9pm"></td>
+                    <td id="friday-9pm"></td>
+                    <td id="saturday-9pm"></td>
+                    <td id="sunday-9pm"></td>
+                </tr>
+            </tbody>
+
+        </table>
+
+        <!-- Add New Task Modal -->
+        <div class="modal" id="addTaskModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Thêm mới lịch dạy</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <form id="taskForm">
+                            <div class="form-group">
+                                <label for="taskName">Tên học sinh hoặc lớp học</label>
+                                <input type="text" class="form-control" id="taskName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="taskStatus">Đã hoàn thành tiết dạy hay chưa ?</label>
+                                <select class="form-control" id="taskStatus">
+                                    <option value="not-completed">Đã hoàn thành / Xong tiết</option>
+                                    <option value="completed">Chưa hoàn thành / Hủy tiết</option>
+                                </select>
+                            </div>
+                            <button type="button" class="btn btn-success" id="addTaskBtn">Thêm mới / Cập nhật
+                                lại</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Function to open the add task modal
+            function openAddTaskModal(day, time) {
+                $('#selectedDay').val(day);
+                $('#selectedTime').val(time);
+
+                $('#addTaskModal').modal('show');
+                $('#addTaskModal').on('hidden.bs.modal', function () {
+                    $('#taskForm')[0].reset();
+                });
+
+                // Submit form to add task
+                $('#addTaskBtn').click(function () {
+                    var taskName = $('#taskName').val();
+                    var taskStatus = $('#taskStatus').val();
+
+                    $('#' + day + '-' + time).html(taskName + ' (' + taskStatus + ')');
+                    $('#addTaskModal').modal('hide');
+                });
+            }
+
+            // Open add task modal on cell click
+            $('td').click(function () {
+                var day = $(this).closest('tr').find('th').text().toLowerCase();
+                var time = $(this).closest('tr').find('th').attr('scope').toLowerCase();
+
+                openAddTaskModal(day, time);
+            });
+
+            // Open add task modal on "Add Task" button click
+            $('#addTaskBtn').click(function () {
+                var day = $('#selectedDay').val();
+                var time = $('#selectedTime').val();
+
+                openAddTaskModal(day, time);
+            });
+        });
+    </script>
+
+    <script>
+        function updateCurrentDateTime() {
+            var currentDateTimeElement = document.getElementById('current-date-time');
+            var currentDateTime = new Date();
+            var hours = currentDateTime.getHours();
+            var minutes = currentDateTime.getMinutes();
+            var seconds = currentDateTime.getSeconds();
+            var day = currentDateTime.getDate();
+            var month = currentDateTime.getMonth() + 1; // Tháng bắt đầu từ 0
+            var year = currentDateTime.getFullYear();
+
+            // Định dạng giờ, phút, giây để có hai chữ số
+            hours = (hours < 10) ? '0' + hours : hours;
+            minutes = (minutes < 10) ? '0' + minutes : minutes;
+            seconds = (seconds < 10) ? '0' + seconds : seconds;
+
+            // Định dạng ngày, tháng, năm để có hai chữ số
+            day = (day < 10) ? '0' + day : day;
+            month = (month < 10) ? '0' + month : month;
+
+            // Hiển thị ngày và thời gian
+            currentDateTimeElement.textContent = day + '/' + month + '/' + year + ' ' + hours + ':' + minutes + ':' + seconds;
+        }
+
+        // Cập nhật thời gian mỗi giây
+        setInterval(updateCurrentDateTime, 1000);
+
+        // Gọi lần đầu để hiển thị ngay từ đầu
+        updateCurrentDateTime();
+    </script>
+</body>
+
+</html>
