@@ -293,7 +293,8 @@
                                     <option value="completed">Chưa hoàn thành / Hủy tiết</option>
                                 </select>
                             </div>
-                            <button type="button" class="btn btn-success" id="addTaskBtn">Thêm mới / Cập nhật
+                            <button type="button" class="btn btn-success" id="addTaskBtn" onclick="addTask()">Thêm mới /
+                                Cập nhật
                                 lại</button>
                         </form>
                     </div>
@@ -347,6 +348,39 @@
     </script>
 
     <script>
+        function addTask() {
+            // Lấy giá trị từ các input trong modal
+            var taskName = $('#taskName').val();
+            var taskStatus = $('#taskStatus').val();
+            var selectedDay = $('#selectedDay').val();
+            var selectedTime = $('#selectedTime').val();
+
+            // Kiểm tra xem tên task có được nhập hay không
+            if (!taskName) {
+                alert('Vui lòng nhập tên học sinh hoặc lớp học.');
+                return;
+            }
+
+            // Cập nhật table với thông tin mới
+            $('#' + selectedDay + '-' + selectedTime).html(taskName + ' (' + taskStatus + ')');
+
+            // Cập nhật options trong select box để tránh trùng lặp
+            $('#taskStatus option[value="' + taskStatus + '"]').remove();
+            $('#taskStatus').append('<option value="' + taskStatus + '">' + (taskStatus === 'not-completed' ? 'Đã hoàn thành / Xong tiết' : 'Chưa hoàn thành / Hủy tiết') + '</option>');
+
+            // Hiển thị thông báo thành công
+            alert('Thêm mới lịch dạy thành công.');
+
+
+            console.log(taskName);
+            console.log(taskStatus);
+            // Ẩn modal
+            $('#addTaskModal').modal('hide');
+        }
+    </script>
+
+
+    <script>
         function updateCurrentDateTime() {
             var currentDateTimeElement = document.getElementById('current-date-time');
             var currentDateTime = new Date();
@@ -367,7 +401,7 @@
             month = (month < 10) ? '0' + month : month;
 
             // Hiển thị ngày và thời gian
-            currentDateTimeElement.textContent = day + '/' + month + '/' + year + ' ' + hours + ':' + minutes + ':' + seconds;
+            currentDateTimeElement.textContent =  'Hôm nay ngày ' + day + '/' + month + '/' + year + ' ' + ' và hiện tại là ' + hours + ':' + minutes + ':' + seconds;
         }
 
         // Cập nhật thời gian mỗi giây
